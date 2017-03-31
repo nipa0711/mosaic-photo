@@ -5,8 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mosaic_photo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="모자이크 이미지 만들기" Height="400" Width="600" Closing="Window_Closing">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Menu HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <MenuItem x:Name="menu_file" Header="파일">
+                <MenuItem x:Name="ImageOpen" Header="이미지 열기" Click="ImageOpen_Click"/>
+                <MenuItem x:Name="ImageSaveAs" Header="다른 이름으로 저장" IsEnabled="False" Click="ImageSaveAs_Click"/>
+                <Separator HorizontalAlignment="Left" Width="190"/>
+                <MenuItem x:Name="ProgramEnd" Header="끝내기" Click="ProgramEnd_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="menu_look" Header="보기" IsEnabled="False">
+                <MenuItem x:Name="viewImgScreenSize" Header="화면에 맞춰 보기" IsCheckable="True" Click="viewImgScreenSize_Click"/>
+                <MenuItem x:Name="viewOriginalSize" Header="100% 크기로 보기" IsCheckable="True" Click="viewOriginalSize_Click"/>
+                <MenuItem x:Name="viewImgWidthSize" Header="가로폭에 맞춰 보기" IsCheckable="True" Click="viewImgWidthSize_Click"/>
+                <MenuItem x:Name="viewImgHeightSize" Header="세로폭에 맞춰 보기" IsCheckable="True" Click="viewImgHeightSize_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="convertImg" Header="이미지 변환" IsEnabled="False" Click="convertImg_Click"></MenuItem>
+            <MenuItem Header="API Key 입력" x:Name="setAPI" Click="setAPI_Click"></MenuItem>
+            <MenuItem Header="Made by nipa0711@gmail.com" IsEnabled="False"></MenuItem>
+        </Menu>
+        <GroupBox Grid.Column="0" Grid.Row="1" BorderThickness="0">
+            <GroupBox.ContextMenu>
+                <ContextMenu IsEnabled="{Binding IsEnabled, Source={x:Reference menu_look}}">
+                    <MenuItem Header="화면에 맞춰 보기" IsChecked="{Binding IsChecked, Source={x:Reference viewImgScreenSize}}" Click="viewImgScreenSize_Click"/>
+                    <MenuItem Header="100% 크기로 보기" IsChecked="{Binding IsChecked, Source={x:Reference viewOriginalSize}}" Click="viewOriginalSize_Click"/>
+                    <MenuItem Header="가로폭에 맞춰 보기" IsChecked="{Binding IsChecked, Source={x:Reference viewImgWidthSize}}" Click="viewImgWidthSize_Click"/>
+                    <MenuItem Header="세로폭에 맞춰 보기" IsChecked="{Binding IsChecked, Source={x:Reference viewImgHeightSize}}" Click="viewImgHeightSize_Click"/>
+                </ContextMenu>
+            </GroupBox.ContextMenu>
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" Margin="4" Grid.Row="1">
+                <ScrollViewer x:Name="ImageScroll" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled">
+                    <Image x:Name="image"/>
+                </ScrollViewer>
+            </Border>
+        </GroupBox>
+        <GroupBox Header="Log" Grid.Row="1" Grid.Column="1">
+            <Border BorderThickness="1" BorderBrush="Black" Background="White" Margin="4">
+                <TextBox x:Name="logBox" TextWrapping="Wrap" VerticalScrollBarVisibility ="Visible" FontSize="15"/>
+            </Border>
+        </GroupBox>
     </Grid>
 </Window>
