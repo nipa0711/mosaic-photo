@@ -1,9 +1,9 @@
-﻿using System;
+﻿using FlickrNet;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using FlickrNet;
 
 /* http://wpfkorea.tistory.com/158 참조 */
 
@@ -41,7 +41,7 @@ namespace mosaic_photo
             DrawingContext.PushOpacity(0.3);
 
             updateLog("\n----- 이미지를 제작하고 있습니다. ------\n");
-            // FlickrImage에 저장된 이미지 중 랜덤으로 하나씩 선택하여 원래 이미지위에 덮어쓰기를 수행
+            // FlickrImage에 저장된 이미지 중 랜덤으로 하나씩 선택하여 원래 이미지 위에 덮어쓰기를 수행
             Random Random = new Random((int)DateTime.Now.TimeOfDay.TotalMilliseconds);
             for (double X = 0; X < MyImageWidth - 1; X += ImageWidth)
             {
@@ -61,8 +61,8 @@ namespace mosaic_photo
             // 데이터가 저장된 DrawingGroup을 ResultImage에 저장
             ResultImage.Drawing = Group;
 
-            updateLog("----- 작업완료! -----");
             // 결과 return.
+
             return ResultImage;
         }
 
@@ -83,7 +83,7 @@ namespace mosaic_photo
                 BitmapImage ImageItem = new BitmapImage();
                 ImageItem.BeginInit();
 
-                // Mosaic에 사용될 Image는 크기가 작아도 무방하므로 ThumbnailImage를 사용
+                // 사용 될 Image는 크기가 작아도 무방하므로 ThumbnailImage를 사용
                 ImageItem.UriSource = new Uri(PhotoItem.ThumbnailUrl);
                 // 빠른 처리를 위해 Cache사용
                 ImageItem.CacheOption = BitmapCacheOption.OnLoad;

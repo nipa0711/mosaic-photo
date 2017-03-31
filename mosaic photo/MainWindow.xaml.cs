@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Microsoft.ProjectOxford.Vision;
+using Microsoft.ProjectOxford.Vision.Contract;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Win32;
-using System.IO;
-using Microsoft.ProjectOxford.Vision;
-using Microsoft.ProjectOxford.Vision.Contract;
-
 
 namespace mosaic_photo
 {
@@ -257,6 +256,13 @@ namespace mosaic_photo
                     }
                 }
 
+                if(keywords.Count<=0)
+                {
+                    updateLog("충분한 신뢰성의 태그 획득에 실패하였습니다.");
+                    updateLog("작업이 중단되었습니다.");
+                    return;
+                }
+
                 updateLog("키워드는 이미지 분석 결과 태그 중 랜덤으로 선택됩니다.");
 
                 Random r = new Random((int)DateTime.Now.TimeOfDay.TotalMilliseconds);
@@ -267,6 +273,8 @@ namespace mosaic_photo
 
                 updateLog("선택된 키워드 : " + keywords[num] + "\n");
                 image.Source = getFlickrImage(keywords[num]);
+
+                updateLog("----- 작업완료! -----");
             }
             catch (Exception ERR)
             {

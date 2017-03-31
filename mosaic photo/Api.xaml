@@ -10,7 +10,7 @@
         <StackPanel Orientation="Vertical" Margin="10">
             <TextBlock>Microsoft Computer Vision API</TextBlock>
             <TextBox x:Name="ms_api" Width="250" Height="20" HorizontalAlignment="Left" Margin="0,5,0,0"></TextBox>
-            <TextBlock Margin="0,5,0,0">Flickr API :</TextBlock>
+            <TextBlock Margin="0,5,0,0">Flickr API</TextBlock>
             <TextBox x:Name="flickr_api" Width="250" Height="20" HorizontalAlignment="Left" Margin="0,5,0,0"></TextBox>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
                 <Button x:Name="btnOk" Content="확인" Width="100" Click="btnOk_Click"/>
